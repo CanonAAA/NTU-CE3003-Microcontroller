@@ -1,0 +1,20 @@
+#define the macros
+SRCS= hello.c hellof.c hellof2.c
+OBJS= hello.o hellof.o hellof2.o
+DEPS= hello.h hellof2.h
+CC= gcc
+
+ $@ $<
+
+all: hello hello-d
+
+hello-d: $(SRCS) $(DEPS)
+	$(CC) -g -o $@ $^ 
+
+hello: $(OBJS)
+	$(CC) -o $@ $^
+
+.PHONY: clean
+
+clean:
+	rm edit $(OBJS)

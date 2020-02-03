@@ -1,0 +1,26 @@
+#define the macros
+SDIR = ../src
+ODIR = ../obj
+IDIR = ../inc
+
+SRCS= hello.c hellof.c hellof2.c
+OBJS= hello.o hellof.o hellof2.o
+DEPS= hellof2.h
+CC= gcc
+
+#$(OBJS): $(SRCS) $(DEPS)
+#	$(CC) -c -o $@ $<
+
+all: hello hello-d
+
+
+hello-d: $(SRCS)/%.c  $(DEPS)/%.h
+	$(CC) -g -o $@ $^ 
+
+hello: $(SRCS)/%.c  $(DEPS)/%.h
+	$(CC) -o $@ $^
+
+.PHONY: clean
+
+clean:
+	rm edit $(OBJS)/%.o

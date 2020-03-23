@@ -53,7 +53,7 @@ static void CustomerTask (void* pvParameters) {
         xSemaphoreGive(custReady); 
         xSemaphoreGive(getTicket);
         xSemaphoreTake(barberReady,portMAX_DELAY); //After this the barber will be tending to him alr
-        digitalWrite(seats[assign],LOW);
+        digitalWrite(seats[seat_no],LOW);
         Serial.print("{LED @ PIN ");Serial.print(seats[seat_no]);Serial.println(" TURNING OFF."); 
         
         

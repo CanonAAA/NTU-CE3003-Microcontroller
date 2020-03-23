@@ -29,17 +29,18 @@ static void Task1(void *pvParameters)
   Serial.println("'''''''''''''''''''''Task 1 started'''''''''''''''''''''''''");
   while (Serial.available() ==0){}
   while (Serial.available()>0) {
-
+      
       t = Serial.read(); 
-      Serial.print("You typed: " );
-      Serial.print(t);  
+      vTaskDelay(pdMS_TO_TICKS(100));
+      //Serial.print("You typed: " );
+      //Serial.print(t);  
       if (i<4) {   
         s1[i] = t;
         i++;
-        Serial.println();
+        //Serial.println();
       }
       else{
-        Serial.println(" - discarded");
+        //Serial.println(" - discarded");
       }
   }
   

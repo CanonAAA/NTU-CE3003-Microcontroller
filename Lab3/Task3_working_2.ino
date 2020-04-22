@@ -69,8 +69,9 @@ static void CustomerTask (void* pvParameters) {
 }
 
 static void BarberTask(void *pvParameters) {
+  int sleep_print_flag = 0;
   while(1) {
-    if (xSemaphoreTake(custReady,(TickType_t)10)== pdTRUE) {
+    if (avail_seats == 0) {
       printID(0);   Serial.println("Wakkey, time to cut sum hair.");
       xSemaphoreTake(getTicket,portMAX_DELAY); //racing condition between barber take one out and cus coming in
       avail_seats++; //take in one customer
@@ -79,10 +80,14 @@ static void BarberTask(void *pvParameters) {
       xSemaphoreGive(getTicket);
       vTaskDelay(pdMS_TO_TICKS(random(5000,7000))); //cutting ya damn hair
       printID(0); Serial.println("Hope you are happy with your hair, see you again");
+      sleep_print_flag = 0;
       }
-    else{
+    else if (sleep_print_flag == 0) {
       printID(0);   Serial.println("Sleepy Sleepy gonna do a nappy....Zzz....Zzz");
       vTaskDelay(pdMS_TO_TICKS(random(1000,10000)));  //Sleep rate
+    }
+    else {
+        //do nothing
     }
   }  
 }
